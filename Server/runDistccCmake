@@ -1,0 +1,17 @@
+#!/bin/bash
+
+rm CMakeCache.txt
+rm Makefile
+rm cmake_install.cmake
+rm compile_commands.json
+rm rules.ninja
+rm -rf CMakeFiles
+
+cmake CMakeLists.txt \
+  -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_C_COMPILER=/usr/bin/gcc \
+  -DCMAKE_CXX_COMPILER=/usr/bin/g++ \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+  -DCMAKE_C_COMPILER_LAUNCHER="ccache;distcc" \
+  -DCMAKE_CXX_COMPILER_LAUNCHER="ccache;distcc"

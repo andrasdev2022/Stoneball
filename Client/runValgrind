@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../cpp/Util
+#valgrind --max-stackframe=5147344 ./runTests >v1.log 2>&1
+#valgrind --max-stackframe=5147344 --leak-check=full ./client >v2.log 2>&1
+valgrind --max-stackframe=5147344 --leak-check=full --track-origins=yes ./Stoneball 2>v2.log
+#valgrind --max-stackframe=5147344 -v --track-origins=yes ./runServer >v3.log 2>&1

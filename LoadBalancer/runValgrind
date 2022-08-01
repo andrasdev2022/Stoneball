@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../cpp/Util
+#valgrind --max-stackframe=5147344 ./runTests >v1.log 2>&1
+#valgrind --max-stackframe=5147344 --leak-check=full ./LoadBalancer $1 $2 $3 $4 $5 $6 $7 $8 >v2.log 2>&1
+valgrind --max-stackframe=5147344 -v --track-origins=yes ./runServer $1 $2 $3 $4 $5 $6 $7 $8 2>./v3.log

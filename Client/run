@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../cpp/Util
+#DISPLAY=:99 valgrind --verbose  --leak-check=full ./tests $1 2>log.txt
+#DISPLAY=:99 gdb --args ./tests $1 $2 $3 $4 $5
+#DISPLAY=:99 
+#gdb -ex run --args ./client $1 $2 $3 $4 $5
+#gdb --args ./client $1 $2 $3 $4 $5
+./Stoneball $1 $2 $3 $4 $5
+#DISPLAY=:99 valgrind --leak-check=full ./tests $1 $2 $3 $4 $5

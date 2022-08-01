@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "Compiling Util"
+cd ../cpp/Util
+qmake Util.pro
+rm libUtil.*
+make -j5
+
+echo "Compiling Client"
+cd ../../Client
+rm ./Stoneball
+make -j5

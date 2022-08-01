@@ -1,0 +1,26 @@
+#!/bin/bash
+
+TT=`date`
+
+#QMAKESPEC=/media/andras/3T-2-1TB/WORKSPACE/Qt-4.4.3/mkspecs/linux-g++
+#PATH=/media/andras/3T-2-1TB/WORKSPACE/Qt-4.4.3/bin:$PATH
+#export QMAKESPEC PATH
+
+echo "Compiling Util"
+cd ../cpp/Util
+make clean
+rm libUtil.*
+rm .qmake.stash
+qmake Util.pro
+make -j10
+
+echo "Compiling Client"
+cd ../../Client
+make clean
+rm .qmake.stash
+rm ./Stoneball
+qmake Client.pro
+make -j10
+
+echo $TT
+date

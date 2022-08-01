@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#export DISTCC_HOSTS="192.168.1.6/10 localhost/6"
+export DISTCC_HOSTS="192.168.0.106/10 localhost/6"
+
+echo "Compiling Util"
+cd ../cpp/Util
+qmake Util.pro
+make -j10
+
+echo "Compiling Server"
+cd ../../Server
+ninja runServer -j $(distcc -j)
+

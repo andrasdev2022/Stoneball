@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Compiling Util"
+cd ../cpp/Util
+qmake Util.pro
+make -j10
+
+echo "Compiling Server"
+cd ../../Server
+make -j10

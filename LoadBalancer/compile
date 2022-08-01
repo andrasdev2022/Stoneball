@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Compiling Util"
+cd ../cpp/Util
+qmake Util.pro
+make -j10
+
+echo "Compiling unit_tests"
+cd ../../unit_tests
+make -j10
+
+echo "Compiling LoadBalancer"
+cd ../LoadBalancer
+qmake LoadBalancer.pro
+make -j10

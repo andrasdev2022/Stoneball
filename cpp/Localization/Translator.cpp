@@ -1,0 +1,275 @@
+﻿#include "Translator.h"
+#include "EnumClassOp.h"
+
+Translator::Translator(Language lang) noexcept
+: lang_(lang) {
+    initDictionary();
+}
+
+std::wstring Translator::operator()(TranslateInterface::Key key) const {
+    auto& dict = translations[static_cast<size_t>(lang_)];
+    auto it = dict.find(key);
+    if(it != dict.end()) {
+        return it->second;
+    }
+    return str(key);
+}
+
+void Translator::initDictionary() noexcept {
+    EnumClassOp op(Language::ENGLISH);
+    translations[op][TranslateInterface::Key::TRA__TEAM] = L"Team";
+    translations[op][TranslateInterface::Key::TRA__RED_TEAM] = L"Red team";
+    translations[op][TranslateInterface::Key::TRA__DARK_TEAM] = L"Gray team";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_TEAM] = L"Yellow team";
+    translations[op][TranslateInterface::Key::TRA__GREEN_TEAM] = L"Green team";
+    translations[op][TranslateInterface::Key::TRA__MY_TEAM] = L"My team";
+    translations[op][TranslateInterface::Key::TRA__YOUR_TEAM] = L"Your team";
+    translations[op][TranslateInterface::Key::TRA__RED_TURN] = L"Red turn";
+    translations[op][TranslateInterface::Key::TRA__DARK_TURN] = L"Gray turn";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_TURN] = L"Yellow turn";
+    translations[op][TranslateInterface::Key::TRA__GREEN_TURN] = L"Green turn";
+    translations[op][TranslateInterface::Key::TRA__CONNECTING] = L"Connecting...";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP1_LABEL] = L"2 teams, 4 members";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP2_LABEL] = L"2 teams, 8 members";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP3_LABEL] = L"3 teams, 4 members";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP4_LABEL] = L"3 teams, 8 members";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP5_LABEL] = L"4 teams, 4 members";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP6_LABEL] = L"4 teams, 8 members";
+    translations[op][TranslateInterface::Key::TRA__MINUTES] = L"minutes";
+    translations[op][TranslateInterface::Key::TRA__YOU_LOST] = L"YOU LOST";
+    translations[op][TranslateInterface::Key::TRA__YOU_WON] = L"YOU WON";
+    translations[op][TranslateInterface::Key::TRA__LABEL_PASS] = L"pass";
+    translations[op][TranslateInterface::Key::TRA__LABEL_NEXT_TURN] = L"next turn";
+    translations[op][TranslateInterface::Key::TRA__ROOM_NAME] = L"Room name";
+    translations[op][TranslateInterface::Key::TRA__GAME_HAS_BEGUN] = L"The Game Has Begun";
+    translations[op][TranslateInterface::Key::TRA__GRAY_WON] = L"THE GRAY PLAYER WON";
+    translations[op][TranslateInterface::Key::TRA__RED_WON] = L"THE RED PLAYER WON";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_WON] = L"THE YELLOW PLAYER WON";
+    translations[op][TranslateInterface::Key::TRA__GREEN_WON] = L"THE GREEN PLAYER WON";
+    translations[op][TranslateInterface::Key::TRA__SELECT_AN_AVATAR] = L"Choose a Team!";
+    translations[op][TranslateInterface::Key::TRA__FIELD] = L"Field";
+    translations[op][TranslateInterface::Key::TRA__LENGTH] = L"Length";
+    translations[op][TranslateInterface::Key::TRA__TIME] = L"Time";
+    translations[op][TranslateInterface::Key::TRA__DURATION] = L"Duration";
+    translations[op][TranslateInterface::Key::TRA__START] = L"Start";
+    translations[op][TranslateInterface::Key::TRA__CREATE] = L"Create";
+    translations[op][TranslateInterface::Key::TRA__JOIN] = L"Join";
+    translations[op][TranslateInterface::Key::TRA__LEVELS] = L"Levels";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER] = L"Multiplayer";
+    translations[op][TranslateInterface::Key::TRA__SETTINGS] = L"Settings";
+    translations[op][TranslateInterface::Key::TRA__ABOUT] = L"About";
+    translations[op][TranslateInterface::Key::TRA__ON_ONE_DEVICE] = L"On One Device";
+    translations[op][TranslateInterface::Key::TRA__CREATE_GAME] = L"Create Game (Host)";
+    translations[op][TranslateInterface::Key::TRA__FIND_GAME] = L"Find Game (Join)";
+    translations[op][TranslateInterface::Key::TRA__SAVE] = L"Save";
+    translations[op][TranslateInterface::Key::TRA__LANGUAGE] = L"Language";
+    translations[op][TranslateInterface::Key::TRA__NO_OPPONNENTS_SHOWED_UP] = L"There are no opponents";
+
+    translations[op][TranslateInterface::Key::TRA__ENGLISH] = L"English";
+    translations[op][TranslateInterface::Key::TRA__BULGARIAN] = L"Bulgarian";
+    translations[op][TranslateInterface::Key::TRA__HUNGARIAN] = L"Hungarian";
+    //translations[op][TranslateInterface::Key::TRA__GERMAN] = L"German";
+    //translations[op][TranslateInterface::Key::TRA__FRENCH] = L"French";
+    //translations[op][TranslateInterface::Key::TRA__RUSSIAN] = L"Russian";
+    translations[op][TranslateInterface::Key::TRA__CONNECTION_REJECTED] = L"The server is too busy, please try again later";
+    translations[op][TranslateInterface::Key::TRA__WAITING_FOR_OPPONENT] = L"Waiting for opponent(s)...";
+    translations[op][TranslateInterface::Key::TRA__NETWORK_ERROR] = L"Network error";
+    translations[op][TranslateInterface::Key::TRA__VERSION_DISCREPANCY] = L"Please update your app";
+    translations[op][TranslateInterface::Key::TRA__SOMEONES_TURN] = L"%s's turn";
+    translations[op][TranslateInterface::Key::TRA__PUSHES] = L"Pushes";
+    translations[op][TranslateInterface::Key::TRA__LEVEL] = L"Level: %d";
+
+
+    op = Language::HUNGARIAN;
+    translations[op][TranslateInterface::Key::TRA__TEAM] = L"Csapat";
+    translations[op][TranslateInterface::Key::TRA__RED_TEAM] = L"Piros csapat";
+    translations[op][TranslateInterface::Key::TRA__DARK_TEAM] = L"Szürke csapat";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_TEAM] = L"Sárga csapat";
+    translations[op][TranslateInterface::Key::TRA__GREEN_TEAM] = L"Zöld csapat";
+    translations[op][TranslateInterface::Key::TRA__MY_TEAM] = L"A csapatom";
+    translations[op][TranslateInterface::Key::TRA__YOUR_TEAM] = L"A csapatod";
+    translations[op][TranslateInterface::Key::TRA__RED_TURN] = L"Piros kör";
+    translations[op][TranslateInterface::Key::TRA__DARK_TURN] = L"Szürke kör";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_TURN] = L"Sárga kör";
+    translations[op][TranslateInterface::Key::TRA__GREEN_TURN] = L"Zöld kör";
+    translations[op][TranslateInterface::Key::TRA__CONNECTING] = L"Kapcsolódás...";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP1_LABEL] = L"2 csapat, 4 tag";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP2_LABEL] = L"2 csapat, 8 tag";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP3_LABEL] = L"3 csapat, 4 tag";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP4_LABEL] = L"3 csapat, 8 tag";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP5_LABEL] = L"4 csapat, 4 tag";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP6_LABEL] = L"4 csapat, 8 tag";
+    translations[op][TranslateInterface::Key::TRA__MINUTES] = L"perc";
+    translations[op][TranslateInterface::Key::TRA__YOU_LOST] = L"VESZTETTÉL";
+    translations[op][TranslateInterface::Key::TRA__YOU_WON] = L"GYŐZTÉL";
+    translations[op][TranslateInterface::Key::TRA__LABEL_PASS] = L"passz";
+    translations[op][TranslateInterface::Key::TRA__LABEL_NEXT_TURN] = L"köv. kör";
+    translations[op][TranslateInterface::Key::TRA__ROOM_NAME] = L"Szoba neve";
+    translations[op][TranslateInterface::Key::TRA__GAME_HAS_BEGUN] = L"A játék elkezdődött";
+    translations[op][TranslateInterface::Key::TRA__ENGLISH] = L"Angol";
+    translations[op][TranslateInterface::Key::TRA__BULGARIAN] = L"Bolgár";
+    translations[op][TranslateInterface::Key::TRA__HUNGARIAN] = L"Magyar";
+    //translations[op][TranslateInterface::Key::TRA__GERMAN] = L"Német";
+    //translations[op][TranslateInterface::Key::TRA__FRENCH] = L"Francia";
+    //translations[op][TranslateInterface::Key::TRA__RUSSIAN] = L"Orosz";
+    translations[op][TranslateInterface::Key::TRA__GRAY_WON] = L"A SZÜRKE JÁTÉLKOS GYŐZÖTT";
+    translations[op][TranslateInterface::Key::TRA__RED_WON] = L"A PIROS JÁTÉLKOS GYŐZÖTT";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_WON] = L"A SÁRGA JÁTÉLKOS GYŐZÖTT";
+    translations[op][TranslateInterface::Key::TRA__GREEN_WON] = L"A ZÖLD JÁTÉLKOS GYŐZÖTT";
+    translations[op][TranslateInterface::Key::TRA__CONNECTION_REJECTED] = L"A szerver túlterhelt, kérlek próbáld újra később";
+    translations[op][TranslateInterface::Key::TRA__SELECT_AN_AVATAR] = L"Válassz egy csapatot!";
+    translations[op][TranslateInterface::Key::TRA__FIELD] = L"Pálya";
+    translations[op][TranslateInterface::Key::TRA__LENGTH] = L"Hossz";
+    translations[op][TranslateInterface::Key::TRA__TIME] = L"Idő";
+    translations[op][TranslateInterface::Key::TRA__DURATION] = L"Időtartam";
+    translations[op][TranslateInterface::Key::TRA__START] = L"Indítás";
+    translations[op][TranslateInterface::Key::TRA__CREATE] = L"Létrehozás";
+    translations[op][TranslateInterface::Key::TRA__JOIN] = L"Csatlakozás";
+    translations[op][TranslateInterface::Key::TRA__LEVELS] = L"Szintek";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER] = L"Többjátékos mód";
+    translations[op][TranslateInterface::Key::TRA__SETTINGS] = L"Beállítások";
+    translations[op][TranslateInterface::Key::TRA__ABOUT] = L"A játékról";
+    translations[op][TranslateInterface::Key::TRA__ON_ONE_DEVICE] = L"Egy eszközön";
+    translations[op][TranslateInterface::Key::TRA__CREATE_GAME] = L"Játék létrehozása";
+    translations[op][TranslateInterface::Key::TRA__FIND_GAME] = L"Játék keresése";
+    translations[op][TranslateInterface::Key::TRA__SAVE] = L"Mentés";
+    translations[op][TranslateInterface::Key::TRA__LANGUAGE] = L"Nyelv";
+    translations[op][TranslateInterface::Key::TRA__WAITING_FOR_OPPONENT] = L"Ellenfélre várunk...";
+    translations[op][TranslateInterface::Key::TRA__NO_OPPONNENTS_SHOWED_UP] = L"Nincs ellenfél";
+    translations[op][TranslateInterface::Key::TRA__NETWORK_ERROR] = L"Hálózati hiba";
+    translations[op][TranslateInterface::Key::TRA__VERSION_DISCREPANCY] = L"Kérlek frissítsd a játékot";
+    translations[op][TranslateInterface::Key::TRA__SOMEONES_TURN] = L"%s köre";
+    translations[op][TranslateInterface::Key::TRA__PUSHES] = L"Tolások";
+    translations[op][TranslateInterface::Key::TRA__LEVEL] = L"Szint: %d";
+
+    op = Language::BULGARIAN;
+    translations[op][TranslateInterface::Key::TRA__TEAM] = L"Отбор";
+    translations[op][TranslateInterface::Key::TRA__RED_TEAM] = L"Червен отбор";
+    translations[op][TranslateInterface::Key::TRA__DARK_TEAM] = L"Cив отбор";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_TEAM] = L"Жълт отбор";
+    translations[op][TranslateInterface::Key::TRA__GREEN_TEAM] = L"Зелен отбор";
+    translations[op][TranslateInterface::Key::TRA__MY_TEAM] = L"Моят отбор";
+    translations[op][TranslateInterface::Key::TRA__YOUR_TEAM] = L"Твоят отбор";
+
+    translations[op][TranslateInterface::Key::TRA__RED_TURN] = L"Ред на червените";
+    translations[op][TranslateInterface::Key::TRA__DARK_TURN] = L"Ред на сивите";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_TURN] = L"Ред на жълтите";
+    translations[op][TranslateInterface::Key::TRA__GREEN_TURN] = L"Ред на зелените";
+    translations[op][TranslateInterface::Key::TRA__CONNECTING] = L"Cвързване...";
+
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP1_LABEL] = L"2 отбора, 4 членове";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP2_LABEL] = L"2 отбора, 8 членове";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP3_LABEL] = L"3 отбора, 4 членове";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP4_LABEL] = L"3 отбора, 8 членове";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP5_LABEL] = L"4 отбора, 4 членове";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER_MAP6_LABEL] = L"4 отбора, 8 членове";
+    translations[op][TranslateInterface::Key::TRA__MINUTES] = L"минути";
+    translations[op][TranslateInterface::Key::TRA__YOU_LOST] = L"ТИ ГУБИШ";
+    translations[op][TranslateInterface::Key::TRA__YOU_WON] = L"ТИ ПЕЧЕЛИШ";
+    translations[op][TranslateInterface::Key::TRA__LABEL_PASS] = L"пас";
+    translations[op][TranslateInterface::Key::TRA__LABEL_NEXT_TURN] = L"следващия";
+    translations[op][TranslateInterface::Key::TRA__ROOM_NAME] = L"Име на стаята";
+    translations[op][TranslateInterface::Key::TRA__ENGLISH] = L"Английски";
+    translations[op][TranslateInterface::Key::TRA__BULGARIAN] = L"Български";
+    translations[op][TranslateInterface::Key::TRA__HUNGARIAN] = L"Унгарски";
+    //translations[op][TranslateInterface::Key::TRA__GERMAN] = L"Немски";
+    //translations[op][TranslateInterface::Key::TRA__FRENCH] = L"Френски";
+    //translations[op][TranslateInterface::Key::TRA__RUSSIAN] = L"Руски";
+    translations[op][TranslateInterface::Key::TRA__GAME_HAS_BEGUN] = L"Играта започна";
+    translations[op][TranslateInterface::Key::TRA__GRAY_WON] = L"СИВИЯТ ИГРАЧ СПЕЧЕЛИ";
+    translations[op][TranslateInterface::Key::TRA__RED_WON] = L"ЧЕРВЕНИЯТ ИГРАЧ СПЕЧЕЛИ";
+    translations[op][TranslateInterface::Key::TRA__BLONDE_WON] = L"ЖЪЛТИЯТ ИГРАЧ СПЕЧЕЛИ";
+    translations[op][TranslateInterface::Key::TRA__GREEN_WON] = L"ЗЕЛЕНИЯТ ИГРАЧ СПЕЧЕЛИ";
+    translations[op][TranslateInterface::Key::TRA__CONNECTION_REJECTED] = L"Сървърът е претоварен, опитайте по-късно";
+    translations[op][TranslateInterface::Key::TRA__SELECT_AN_AVATAR] = L"Избери отбор!";
+    translations[op][TranslateInterface::Key::TRA__FIELD] = L"Терен";
+    translations[op][TranslateInterface::Key::TRA__LENGTH] = L"Продължителност";
+    translations[op][TranslateInterface::Key::TRA__TIME] = L"Време";
+    translations[op][TranslateInterface::Key::TRA__DURATION] = L"Траене";
+    translations[op][TranslateInterface::Key::TRA__START] = L"Начало";
+    translations[op][TranslateInterface::Key::TRA__CREATE] = L"Cъздай";
+    translations[op][TranslateInterface::Key::TRA__JOIN] = L"Присъедини се";
+    translations[op][TranslateInterface::Key::TRA__LEVELS] = L"Нива";
+    translations[op][TranslateInterface::Key::TRA__MULTIPLAYER] = L"Мултиплейър"; // Групова игра
+    translations[op][TranslateInterface::Key::TRA__SETTINGS] = L"Настройки";
+    translations[op][TranslateInterface::Key::TRA__ABOUT] = L"За играта";
+    translations[op][TranslateInterface::Key::TRA__ON_ONE_DEVICE] = L"На едно устройство";
+    translations[op][TranslateInterface::Key::TRA__CREATE_GAME] = L"Cъздай игра";
+    translations[op][TranslateInterface::Key::TRA__FIND_GAME] = L"Намери игра";
+    translations[op][TranslateInterface::Key::TRA__SAVE] = L"Запази";
+    translations[op][TranslateInterface::Key::TRA__LANGUAGE] = L"Език";
+    translations[op][TranslateInterface::Key::TRA__WAITING_FOR_OPPONENT] = L"В очакване на противник/ци...";
+    translations[op][TranslateInterface::Key::TRA__NO_OPPONNENTS_SHOWED_UP] = L"Няма противници";
+    translations[op][TranslateInterface::Key::TRA__NETWORK_ERROR] = L"Мрежова грешка";
+    translations[op][TranslateInterface::Key::TRA__VERSION_DISCREPANCY] = L"Моля, актуализирай приложението си";
+    translations[op][TranslateInterface::Key::TRA__SOMEONES_TURN] = L"Ред на %s";
+    translations[op][TranslateInterface::Key::TRA__PUSHES] = L"Бутания";
+    translations[op][TranslateInterface::Key::TRA__LEVEL] = L"Ниво: %d";
+}
+
+std::wstring Translator::str(TranslateInterface::Key key) const noexcept {
+    switch(key) {
+    case TranslateInterface::Key::TRA__TEAM: return L"TRA__TEAM";
+    case TranslateInterface::Key::TRA__DARK_TEAM: return L"TRA__DARK_TEAM";
+    case TranslateInterface::Key::TRA__DARK_TURN: return L"TRA__DARK_TURN";
+    case TranslateInterface::Key::TRA__BLONDE_TEAM: return L"TRA__BLONDE_TEAM";
+    case TranslateInterface::Key::TRA__BLONDE_TURN: return L"TRA__BLONDE_TURN";
+    case TranslateInterface::Key::TRA__GREEN_TEAM: return L"TRA__GREEN_TEAM";
+    case TranslateInterface::Key::TRA__GREEN_TURN: return L"TRA__GREEN_TURN";
+    case TranslateInterface::Key::TRA__RED_TEAM: return L"TRA__RED_TEAM";
+    case TranslateInterface::Key::TRA__RED_TURN: return L"TRA__RED_TURN";
+    case TranslateInterface::Key::TRA__MY_TEAM: return L"TRA__MY_TEAM";
+    case TranslateInterface::Key::TRA__YOUR_TEAM: return L"TRA__YOUR_TEAM";
+    case TranslateInterface::Key::TRA__CONNECTING: return L"TRA__CONNECTING";
+    case TranslateInterface::Key::LAST_ONE: return L"LAST_ONE";
+    case TranslateInterface::Key::TRA__MULTIPLAYER_MAP1_LABEL: return L"MULTIPLAYER_MAP1_LABEL";
+    case TranslateInterface::Key::TRA__MULTIPLAYER_MAP2_LABEL: return L"MULTIPLAYER_MAP2_LABEL";
+    case TranslateInterface::Key::TRA__MULTIPLAYER_MAP3_LABEL: return L"MULTIPLAYER_MAP3_LABEL";
+    case TranslateInterface::Key::TRA__MULTIPLAYER_MAP4_LABEL: return L"MULTIPLAYER_MAP4_LABEL";
+    case TranslateInterface::Key::TRA__MULTIPLAYER_MAP5_LABEL: return L"MULTIPLAYER_MAP5_LABEL";
+    case TranslateInterface::Key::TRA__MULTIPLAYER_MAP6_LABEL: return L"MULTIPLAYER_MAP6_LABEL";
+    case TranslateInterface::Key::TRA__MINUTES: return L"MINUTES";
+    case TranslateInterface::Key::TRA__YOU_LOST: return L"YOU_LOST";
+    case TranslateInterface::Key::TRA__YOU_WON: return L"YOU_WON";
+    case TranslateInterface::Key::TRA__LABEL_PASS: return L"LABEL_PASS";
+    case TranslateInterface::Key::TRA__LABEL_NEXT_TURN: return L"LABEL_NEXT_TURN";
+    case TranslateInterface::Key::TRA__ROOM_NAME: return L"ROOM_NAME";
+    case TranslateInterface::Key::TRA__GAME_HAS_BEGUN: return L"GAME_HAS_BEGUN";
+    case TranslateInterface::Key::TRA__ENGLISH: return L"ENGLISH";
+    case TranslateInterface::Key::TRA__BULGARIAN: return L"BULGARIAN";
+    case TranslateInterface::Key::TRA__HUNGARIAN: return L"HUNGARIAN";
+    //case TranslateInterface::Key::TRA__GERMAN: return L"GERMAN";
+    //case TranslateInterface::Key::TRA__FRENCH: return L"FRENCH";
+    //case TranslateInterface::Key::TRA__RUSSIAN: return L"RUSSIAN";
+    case TranslateInterface::Key::TRA__GRAY_WON: return L"GRAY_WON";
+    case TranslateInterface::Key::TRA__RED_WON: return L"RED_WON";
+    case TranslateInterface::Key::TRA__BLONDE_WON: return L"YELLOW_WON";
+    case TranslateInterface::Key::TRA__GREEN_WON: return L"GREEN_WON";
+    case TranslateInterface::Key::TRA__CONNECTION_REJECTED: return L"CONNECTION_REJECTED";
+    case TranslateInterface::Key::TRA__SELECT_AN_AVATAR: return L"SELECT_AN_AVATAR";
+    case TranslateInterface::Key::TRA__FIELD: return L"FIELD";
+    case TranslateInterface::Key::TRA__LENGTH: return L"LENGTH";
+    case TranslateInterface::Key::TRA__TIME: return L"TIME";
+    case TranslateInterface::Key::TRA__DURATION: return L"DURATION";
+    case TranslateInterface::Key::TRA__START: return L"START";
+    case TranslateInterface::Key::TRA__CREATE: return L"CREATE";
+    case TranslateInterface::Key::TRA__JOIN: return L"JOIN";
+    case TranslateInterface::Key::TRA__LEVELS: return L"LEVELS";
+    case TranslateInterface::Key::TRA__MULTIPLAYER: return L"MULTIPLAYER";
+    case TranslateInterface::Key::TRA__SETTINGS: return L"SETTINGS";
+    case TranslateInterface::Key::TRA__ABOUT: return L"ABOUT";
+    case TranslateInterface::Key::TRA__ON_ONE_DEVICE: return L"ON_ONE_DEVICE";
+    case TranslateInterface::Key::TRA__CREATE_GAME: return L"CREATE_GAME";
+    case TranslateInterface::Key::TRA__FIND_GAME: return L"FIND_GAME";
+    case TranslateInterface::Key::TRA__SAVE: return L"SAVE";
+    case TranslateInterface::Key::TRA__LANGUAGE: return L"LANGUAGE";
+    case TranslateInterface::Key::TRA__WAITING_FOR_OPPONENT: return L"WAITING_FOR_OPPONENT";
+    case TranslateInterface::Key::TRA__NO_OPPONNENTS_SHOWED_UP: return L"NO_OPPONNENTS_SHOWED_UP";
+    case TranslateInterface::Key::TRA__NETWORK_ERROR: return L"NETWORK_ERROR";
+    case TranslateInterface::Key::TRA__VERSION_DISCREPANCY: return L"TRA__VERSION_DISCREPANCY";
+    case TranslateInterface::Key::TRA__SOMEONES_TURN: return L"TRA__SOMEONES_TURN";
+    case TranslateInterface::Key::TRA__PUSHES: return L"TRA__PUSHES";
+    case TranslateInterface::Key::TRA__LEVEL: return L"TRA__LEVEL";
+    }
+    return L"";
+}

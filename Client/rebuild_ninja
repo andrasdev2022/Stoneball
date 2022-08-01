@@ -1,0 +1,19 @@
+#!/bin/bash
+
+TT=`date`
+
+echo "Compiling Util"
+cd ../cpp/Util
+make clean
+rm libUtil.*
+rm .qmake.stash
+qmake Util.pro
+make -j10
+
+echo "Compiling Client"
+cd ../../Client
+./runDistccCmake
+./compile_ninja
+
+echo $TT
+date
